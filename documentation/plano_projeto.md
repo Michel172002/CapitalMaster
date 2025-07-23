@@ -61,30 +61,30 @@ Tabelas principais:
 
 ## 🛣️ Roadmap do Projeto
 
-### Fase 1 – Planejamento (1 semana)
+### Fase 1 – Planejamento
 - Levantamento de requisitos
 - Criação do layout (wireframes)
 - Definição de tecnologias e stack
 - Estruturação inicial do repositório
 
-### Fase 2 – MVP Financeiro (2 a 3 semanas)
+### Fase 2 – MVP Financeiro
 - Sistema de autenticação
 - Cadastro de receitas/despesas
 - Relatório mensal de transações
 - Dashboard simples com saldo e gráfico
 
-### Fase 3 – Módulo de Investimentos (3 a 4 semanas)
+### Fase 3 – Módulo de Investimentos
 - Cadastro de ativos e operações
 - Cálculo de rentabilidade
 - Integração com API para cotações
 - Gráficos de performance
 
-### Fase 4 – Bolsa em Tempo Real (1 a 2 semanas)
+### Fase 4 – Bolsa em Tempo Real
 - Tela de acompanhamento de ativos
 - Integração com feed de notícias
 - Alertas de variação
 
-### Fase 5 – Ajustes Finais e Deploy (1 semana)
+### Fase 5 – Ajustes Finais e Deploy
 - Testes
 - Otimizações
 - Documentação

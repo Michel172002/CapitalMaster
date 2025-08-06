@@ -15,7 +15,7 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
     </head>
-    <body>
+    <body class="bg-fundo">
         @yield('content')
         
         @livewireScripts

@@ -16,9 +16,8 @@
 
             <x-registration-progress-bar />
 
-            <div x-show="currentStep === 1" class="w-full flex flex-col gap-4">
+            <div x-show="currentStep === 1" class="w-full flex flex-col gap-4 my-auto">
                 <form class="w-full flex flex-col gap-2">
-                    <img src="{{ asset('images/user.svg') }}" alt="user" class="w-12 h-12">
                     <x-inputs.input label="Nome" name="name" type="text" placeholder="Digite seu nome" model="name" />
                     <x-inputs.input label="Email" name="email" type="email" placeholder="Digite seu email" model="email" />
                     <x-inputs.input label="Senha" name="password" type="password" placeholder="Digite sua senha" model="password" />
@@ -31,7 +30,7 @@
                 </div>
             </div>
 
-            <div x-show="currentStep === 2" class="w-full flex flex-col gap-8">
+            <div x-show="currentStep === 2" class="w-full flex flex-col gap-8 my-auto">
                 <span class="text-sm text-gray-500/70 font-semibold text-center">
                     Enviamos um código de 5 dígitos para o seu e-mail.<br> Insira-o abaixo para confirmar sua conta.
                 </span>
@@ -44,7 +43,7 @@
                 </div>
             </div>
             
-            <div x-show="currentStep === 3" class="w-full flex flex-col gap-4">
+            <div x-show="currentStep === 3" class="w-full flex flex-col gap-4 my-auto">
                 <x-inputs.radio-group 
                     name="objetivo"
                     :hide_radio="true"
@@ -67,14 +66,22 @@
                         ]
                     ]" 
                 />
+                <div class="flex flex-row gap-2">
+                    <div class="w-1/2">
+                        <x-inputs.input label="Qual a sua Renda Mensal?" name="income" type="text" placeholder="Sua renda mensal aproximada" model="income" />
+                    </div>
+                    <div class="w-1/2">
+                        <x-inputs.select label="Qual a moeda que você usa?" name="currency" placeholder="Selecione uma opção" model="currency" 
+                        :options="['BRL' => 'R$ (Real Brasileiro)', 'USD' => 'US$ (Dólar Americano)', 'EUR' => '€ (Euro)']" />
+                    </div>
+                </div>
+                
+                <x-buttons.button label="Finalizar Cadastro" width="full" />
             </div>
 
             <p class="text-sm text-gray-500/70 font-semibold mt-auto">
                 Já tem uma conta? <a href="{{ route('login') }}" class="text-black">Faça login</a>
             </p>
         </div>
-    </div>
-    <div class="w-4/6 h-full flex flex-col items-center justify-center">
-        <x-inputs.teste />
     </div>
 </div>

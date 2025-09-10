@@ -16,7 +16,7 @@
     @foreach($options as $index => $option)
         <label 
             x-on:click="selectedValue = '{{ data_get($option, 'value') }}'" 
-            class="flex items-start p-5 space-x-3 bg-white border rounded-md shadow-sm hover:bg-gray-50 border-neutral-200/70 {{ $direction === 'flex-row' ? 'flex-1' : 'w-full' }} h-full"
+            class="flex items-center justify-center tw-w-full p-5 space-x-3 bg-white border rounded-md shadow-sm hover:bg-gray-50 border-neutral-200/70 {{ $direction === 'flex-row' ? 'flex-1' : 'w-full' }} h-28"
             :class="{ 
                 'ring-2 ring-primaria': selectedValue === '{{ data_get($option, 'value') }}' 
             }"
@@ -28,7 +28,7 @@
                 value="{{ data_get($option, 'value') }}"
                 class="{{ $hide_radio ? 'hidden' : 'translate-y-px focus:ring-primaria' }}"
             />
-            <span class="relative flex flex-col items-center justify-center text-left space-y-1.5 leading-none"
+            <span class="relative flex flex-col items-center justify-center text-left space-y-1.5 leading-none text-gray-500"
                 :class="{ 
                     'text-primaria': selectedValue === '{{ data_get($option, 'value') }}' 
                 }"
@@ -37,7 +37,7 @@
                     {!! data_get($option, 'svg') !!}
                 @endif
                 @if(data_get($option, 'title'))
-                    <span class="font-semibold text-sm">{{ data_get($option, 'title') }}</span>
+                    <span class="font-semibold text-sm text-center">{{ data_get($option, 'title') }}</span>
                 @endif
                 @if(data_get($option, 'description'))
                     <span class="text-xs text-gray-500">{{ data_get($option, 'description') }}</span>

@@ -1,11 +1,8 @@
-<div 
-    x-data="{
-        currentStep: 1,
-    }"
+<div
     id="main" 
     class="w-full h-screen flex items-center justify-center px-16"
 >
-    <x-register.form-card />
+    <x-register.form-card :currentStep="$currentStep" />
     <x-side-banner 
         :infos="[
             [

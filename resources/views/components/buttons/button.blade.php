@@ -2,7 +2,7 @@
     'type' => 'button',
     'label' => '',
     'width' => 'fit',
-    'color' => 'primaria',
+    'color' => 'primary',
 ])
 
 <button 

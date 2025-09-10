@@ -1,4 +1,4 @@
-@props(['name' => 'code', 'id' => 'code', 'value' => '', 'maxLength' => 5])
+@props(['name' => 'code', 'id' => 'code', 'value' => '', 'maxLength' => 5, 'model' => ''])
 
 <div
     x-data="{
@@ -27,7 +27,7 @@
             type="text"
             maxlength="1"
             x-model="inputValues[{{ $i - 1 }}]"
-            class="w-12 h-12 text-center text-xl uppercase border-2 border-gray-300 rounded focus:border-blue-500 focus:ring-blue-500"
+            class="w-12 h-12 text-center text-xl uppercase border-2 border-gray-300 rounded focus:border-primary-500 focus:ring-primary-500"
             x-on:input="
                 inputValues[{{ $i - 1 }}] = $el.value;
                 $refs.hiddenInput.value = inputValues.join('');
@@ -47,6 +47,7 @@
         name="{{ $name }}" 
         id="{{ $id }}" 
         value="{{ $value }}"
+        wire:model="{{ $model }}"
         x-ref="hiddenInput"
     >
 </div>

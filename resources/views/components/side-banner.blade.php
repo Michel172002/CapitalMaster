@@ -25,7 +25,7 @@
     }"
     class="w-[65%] h-full flex flex-col items-center justify-center p-8"
 >
-    <div class="w-full h-full bg-linear-to-t from-primaria-300 to-secundaria-400 shadow-lg rounded-3xl py-8 px-24 overflow-hidden">
+    <div class="w-full h-full bg-linear-to-t from-primary-300 to-secundary-400 shadow-lg rounded-3xl py-8 px-24 overflow-hidden">
         <div class="relative w-full h-full">
             @foreach($infos as $info)
                 <div 

@@ -16,7 +16,7 @@
     <select 
         name="{{ $name }}" 
         wire:model="{{ $model }}"
-        class="w-full p-2 border border-[#D9D9D9] text-sm text-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-primaria focus:border-primaria-200 bg-white"
+        class="w-full p-2 border border-[#D9D9D9] text-sm text-gray-700 rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary-200 bg-white"
     >
         @if ($emptyOption)
             <option value="" disabled>{{ $placeholder }}</option>

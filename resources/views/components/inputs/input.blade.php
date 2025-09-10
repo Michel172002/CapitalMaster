@@ -18,6 +18,6 @@
         placeholder="{{ $placeholder }}" 
         value="{{ $value }}"
         wire:model="{{ $model }}"
-        class="w-full p-2 border border-[#D9D9D9] text-sm placeholder:text-[#B3B3B3] rounded-md focus:outline-none focus:ring-1 focus:ring-primaria focus:border-primaria-200"
+        class="w-full p-2 border border-[#D9D9D9] text-sm placeholder:text-[#B3B3B3] rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary-200"
     >
 </div>

@@ -144,7 +144,7 @@
         @endif
 
         <p class="text-sm text-gray-500/70 font-semibold mt-auto">
-            Já tem uma conta? <a href="{{ route('login') }}" class="text-black cursor-pointer">Faça login</a>
+            Já tem uma conta? <a href="{{ route('login') }}" wire:navigate class="text-black cursor-pointer">Faça login</a>
         </p>
     </div>
 </div>

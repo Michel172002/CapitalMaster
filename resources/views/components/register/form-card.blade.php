@@ -16,32 +16,84 @@
             <div class="w-full flex flex-col gap-4 my-auto">
                 <form class="w-full flex flex-col gap-2">
                     <x-inputs.input label="Nome" name="name" type="text" placeholder="Digite seu nome" model="registerForm.name" />
-                    <x-inputs.input label="Email" name="email" type="email" placeholder="Digite seu email" model="registerForm.email" />
+                    <x-inputs.input label="Email" name="email" type="email" placeholder="Digite seu email" model="registerForm.email" :live="true" />
                     <x-inputs.input label="Senha" name="password" type="password" placeholder="Digite sua senha" model="registerForm.password" />
                     <x-inputs.input label="Confirmar senha" name="password_confirmation" type="password" placeholder="Digite sua senha novamente" model="registerForm.passwordConfirmation" />
                 </form>
 
                 <div class="w-full flex items-center justify-between gap-4">
                     <x-buttons.oauth-google width="full" />
-                    <x-buttons.button label="Próximo" wire:click="validateStepPersonnalInfo()" width="full" color="primary" />
+                    <x-buttons.button 
+                        label="Próximo" 
+                        wire:click="validateStepPersonnalInfo()" 
+                        width="full" 
+                        color="primary"
+                        wire:loading.attr="disabled"
+                        wire:target="validateStepPersonnalInfo"
+                    >
+                        <span wire:loading.remove wire:target="validateStepPersonnalInfo">Próximo</span>
+                        <span wire:loading wire:target="validateStepPersonnalInfo">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-4 animate-spin inline mr-2" fill="currentColor" viewBox="0 0 640 640">
+                                <path d="M272 112C272 85.5 293.5 64 320 64C346.5 64 368 85.5 368 112C368 138.5 346.5 160 320 160C293.5 160 272 138.5 272 112zM272 528C272 501.5 293.5 480 320 480C346.5 480 368 501.5 368 528C368 554.5 346.5 576 320 576C293.5 576 272 554.5 272 528zM112 272C138.5 272 160 293.5 160 320C160 346.5 138.5 368 112 368C85.5 368 64 346.5 64 320C64 293.5 85.5 272 112 272zM480 320C480 293.5 501.5 272 528 272C554.5 272 576 293.5 576 320C576 346.5 554.5 368 528 368C501.5 368 480 346.5 480 320zM139 433.1C157.8 414.3 188.1 414.3 206.9 433.1C225.7 451.9 225.7 482.2 206.9 501C188.1 519.8 157.8 519.8 139 501C120.2 482.2 120.2 451.9 139 433.1zM139 139C157.8 120.2 188.1 120.2 206.9 139C225.7 157.8 225.7 188.1 206.9 206.9C188.1 225.7 157.8 225.7 139 206.9C120.2 188.1 120.2 157.8 139 139zM501 433.1C519.8 451.9 519.8 482.2 501 501C482.2 519.8 451.9 519.8 433.1 501C414.3 482.2 414.3 451.9 433.1 433.1C451.9 414.3 482.2 414.3 501 433.1z"/>
+                            </svg>
+                            Carregando...
+                        </span>
+                    </x-buttons.button>
                 </div>
             </div>
         @endif
 
         @if ($currentStep == 2)
-            <div class="w-full flex flex-col gap-8 my-auto">
+            <div wire:show="!validatedCode" class="w-full flex flex-col gap-8 my-auto">
                 <span class="text-sm text-gray-500/70 font-semibold text-center">
-                    Enviamos um código de 5 dígitos para o seu e-mail.<br> Insira-o abaixo para confirmar sua conta.
+                    Enviamos um código de 5 dígitos para o seu e-mail.<br> 
+                    Insira-o abaixo para confirmar sua conta.
                 </span>
+                
                 <form class="w-full flex flex-col gap-2">
-                    <x-inputs.validate-input id="code" name="code" model="registerForm.code" />
-                    <p class="text-sm text-center text-gray-500/70 font-semibold mt-auto">
-                        Não recebeu o código? <br> <span wire:click="resendCode()" class="text-black cursor-pointer">Clique aqui para reenviar</span>
-                    </p>
+                    <x-inputs.validate-input 
+                        id="code" 
+                        name="code" 
+                        model="registerForm.code" 
+                        placeholder="Digite o código de 5 dígitos"
+                    />
                 </form>
 
-                <div class="w-full flex items-center justify-between gap-4">
-                    <x-buttons.button label="Validar Código" width="full" />
+                    
+                <div wire:target="resendCode" wire:loading.remove class="text-center flex flex-col gap-0.5 justify-center items-center text-sm text-gray-500/70 font-semibold mt-auto">
+                    <span>
+                        Não recebeu o código?
+                    </span>
+                    <button wire:click="resendCode()" class="text-black cursor-pointer">Clique aqui para reenviar</button>
+                </div>
+                <div wire:target="resendCode" wire:loading class="text-center flex flex-col gap-0.5 justify-center items-center text-sm text-gray-500/70 font-semibold mt-auto">
+                    <span>
+                        Enviando código...
+                    </span>
+                </div>
+
+                <div class="w-full flex flex-col gap-4">
+                    <div class="flex items-center justify-between gap-4">
+                        <x-buttons.button 
+                            label="Validar Código" 
+                            wire:click="validateCode()" 
+                            width="full" 
+                            color="primary" 
+                        />
+                    </div>
+                </div>
+            </div>
+            <div wire:show="validatedCode" class="w-full flex flex-col gap-8 my-auto">
+                <span class="text-sm text-gray-500/70 font-semibold text-center">
+                    Email validado com sucesso!
+                </span>
+                <div class="flex items-center justify-between gap-4">
+                    <x-buttons.button 
+                        label="Continuar" 
+                        wire:click="nextStep()" 
+                        width="full" 
+                        color="primary" 
+                    />
                 </div>
             </div>
         @endif
@@ -73,7 +125,7 @@
                 />
                 <div class="flex flex-row gap-2">
                     <div class="w-1/2">
-                        <x-inputs.input label="Qual a sua Renda Mensal?" name="income" type="text" placeholder="Sua renda mensal aproximada" model="registerForm.income" />
+                        <x-inputs.input label="Qual a sua Renda Mensal?" name="income" type="text" placeholder="Sua renda mensal aproximada" model="registerForm.income" x-mask:dynamic="$money($input, ',')" />
                     </div>
                     <div class="w-1/2">
                         <x-inputs.select label="Qual a sua moeda?" name="currency" placeholder="Selecione uma opção" model="registerForm.currency" 
@@ -81,7 +133,13 @@
                     </div>
                 </div>
                 
-                <x-buttons.button label="Finalizar Cadastro" width="full" />
+                <div class="w-full flex flex-col items-center justify-between gap-4">
+                    <x-buttons.button 
+                        label="Finalizar Cadastro" 
+                        wire:click="validateFinancialInfo()" 
+                        width="full" 
+                    />
+                </div>
             </div>
         @endif
 

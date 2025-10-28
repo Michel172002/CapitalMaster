@@ -3,19 +3,22 @@
 <div
     x-data="{
         inputValues: Array({{ $maxLength }}).fill(''),
+        value: @js($value),
         updateValues(text) {
             const cleanText = text.slice(0, {{ $maxLength }});
-            
+            this.value = cleanText;
             this.inputValues = Array({{ $maxLength }}).fill('').map((_, i) => cleanText[i] || '');
-            this.$refs.hiddenInput.value = cleanText;
-
             this.$nextTick(() => {
                 const lastFilledIndex = Math.max(0, cleanText.length - 1);
                 const inputs = Array.from(this.$el.querySelectorAll('input[type=\'text\']'));
                 inputs[lastFilledIndex]?.focus();
             });
+        },
+        syncValue() {
+            this.value = this.inputValues.join('');
         }
     }"
+    x-init="$watch('value', value => $wire.set('{{$model}}', value))"
     class="flex gap-2 justify-center"
     @paste.prevent="
         const text = $event.clipboardData.getData('text');
@@ -30,7 +33,7 @@
             class="w-12 h-12 text-center text-xl uppercase border-2 border-gray-300 rounded focus:border-primary-500 focus:ring-primary-500"
             x-on:input="
                 inputValues[{{ $i - 1 }}] = $el.value;
-                $refs.hiddenInput.value = inputValues.join('');
+                syncValue();
                 if ($el.value && {{ $i }} < {{ $maxLength }}) {
                     $el.nextElementSibling?.focus();
                 }
@@ -46,8 +49,7 @@
         type="hidden" 
         name="{{ $name }}" 
         id="{{ $id }}" 
-        value="{{ $value }}"
-        wire:model="{{ $model }}"
+        x-model="value"
         x-ref="hiddenInput"
     >
 </div>

@@ -56,7 +56,6 @@ class="fixed top-4 right-4 z-50 space-y-2">
             x-init="
                 setTimeout(() => show = true, 100);
                 setTimeout(() => show = false, 3500);
-                setTimeout(() => $parent.removeToast(toast.id), 4000);
             "
             x-show="show"
             x-transition:enter="transition ease-out duration-300"

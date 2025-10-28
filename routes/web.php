@@ -8,5 +8,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', [AuthRegister::class, 'index']);
+Route::get('/register', [AuthRegister::class, 'index'])->name('register');
 Route::get('/login', [Login::class, 'index'])->name('login');

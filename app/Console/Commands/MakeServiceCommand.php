@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class MakeServiceCommand extends Command
 {
@@ -26,17 +27,42 @@ class MakeServiceCommand extends Command
     public function handle()
     {
         $name = $this->argument('name');
-        $path = app_path('Services/' . $name . 'Service.php');
+        $name = Str::studly(str_replace('Service', '', $name));
+        $className = $name . 'Service';
+        $path = app_path('Services/' . $className . '.php');
+        
         if (file_exists($path)) {
-            $this->error('Service already exists');
-            return;
+            if (!$this->confirm('O arquivo já existe. Deseja sobrescrever?')) {
+                $this->info('Operação cancelada.');
+                return 0;
+            }
         }
+        
+        $directory = dirname($path);
+        if (!is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+        
         file_put_contents($path, $this->generateServiceTemplate($name));
-        $this->info('Service created successfully');
+        $this->info("Service {$className} criado com sucesso em {$path}");
+        
+        return 0;
     }
 
     private function generateServiceTemplate($name)
     {
-        return "<?php\n\nnamespace App\Services;\n\nclass {$name}Service\n{\n    //\n}";
+        return "<?php
+
+namespace App\Services;
+
+class {$name}Service
+{
+    public function __construct()
+    {
+        //
+    }
+
+    // Implemente os métodos do seu serviço aqui
+}";
     }
 }

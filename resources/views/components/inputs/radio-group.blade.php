@@ -17,7 +17,7 @@
     @foreach($options as $index => $option)
         <label 
             x-on:click="selectedValue = '{{ data_get($option, 'value') }}'" 
-            class="flex items-center justify-center tw-w-full p-5 space-x-3 bg-white border rounded-md shadow-sm hover:bg-gray-50 border-neutral-200/70 {{ $direction === 'flex-row' ? 'flex-1' : 'w-full' }} h-28"
+            class="flex items-center justify-center tw-w-full p-5 space-x-3 cursor-pointer bg-white border rounded-md shadow-sm hover:bg-gray-50 border-neutral-200/70 {{ $direction === 'flex-row' ? 'flex-1' : 'w-full' }} h-28"
             :class="{ 
                 'ring-2 ring-primary': selectedValue === '{{ data_get($option, 'value') }}' 
             }"

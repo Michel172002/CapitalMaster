@@ -23,6 +23,7 @@ trait WithNotifications
         $message = match(true){
             $exception instanceof ValidationException => $exception->errors()[array_key_first($exception->errors())][0] ?? 'Erro de validação.',
             $exception instanceof Exception => $exception->getMessage(),
+            is_string($exception) => $exception,
             default => 'Erro interno. Tente novamente.',
         };
         

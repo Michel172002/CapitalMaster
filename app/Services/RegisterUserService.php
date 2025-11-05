@@ -27,17 +27,22 @@ class RegisterUserService
                     'password_confirmation' => $registerDTO->passwordConfirmation,
                 ]);
 
-                ProfileUser::create([
-                    'user_id' => $user->id,
-                    'income' => $registerDTO->income,
-                    'currency' => $registerDTO->currency,
-                    'objective' => $registerDTO->objective,
-                ]);
+                $this->createProfileUser($registerDTO, $user);
 
                 return $user;
             });
         } catch (\Exception $e) {
             throw new \Exception('Erro ao registrar usuário: ' . $e->getMessage());
         }
+    }
+
+    public function createProfileUser(RegisterDTO $registerDTO, User $user): ProfileUser
+    {
+        return ProfileUser::create([
+            'user_id' => $user->id,
+            'income' => $registerDTO->income,
+            'currency' => $registerDTO->currency,
+            'objective' => $registerDTO->objective,
+        ]);
     }
 }

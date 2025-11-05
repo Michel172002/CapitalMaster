@@ -11,4 +11,9 @@ class Register extends Controller
     {
         return view('auth.register');
     }
+
+    public function completeProfile()
+    {
+        return view('auth.complete-profile');
+    }
 }

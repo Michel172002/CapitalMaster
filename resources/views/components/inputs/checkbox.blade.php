@@ -46,14 +46,14 @@
             {{ $checked ? 'checked' : '' }}
             {{ $disabled ? 'disabled' : '' }}
             {{ $required ? 'required' : '' }}
-            class="rounded border-gray-300 {{ $sizeClasses[$size] }} {{ $colorClasses[$color] }} focus:ring-2 {{ $inputClass }}"
+            class="rounded cursor-pointer border-gray-300 {{ $sizeClasses[$size] }} {{ $colorClasses[$color] }} focus:ring-2 {{ $inputClass }}"
         />
     </div>
     
     @if($label)
         <div class="ml-3 text-sm">
             @if($label)
-                <label for="{{ $id }}" class="font-medium text-xs text-gray-700 {{ $sizeLabelClasses[$size] }} {{ $labelClass }}">
+                <label for="{{ $id }}" class="cursor-pointer font-medium text-xs text-gray-700 {{ $sizeLabelClasses[$size] }} {{ $labelClass }}">
                     {{ $label }}
                     @if($required)
                         <span class="text-red-500">*</span>
